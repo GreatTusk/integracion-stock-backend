@@ -1,14 +1,18 @@
 package com.integracion
 
+import com.integracion.com.integracion.stock.controller.productRouting
 import com.integracion.com.integracion.stock.plugin.*
 import io.ktor.server.application.*
+import org.jetbrains.exposed.sql.Database
 
 fun main(args: Array<String>) = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
-    connectToPostgres()
+    Database.connect(::connectToPostgres)
+    initializeDatabase()
+
     configureContentNegotiation()
     configureFrameworks()
     configureHTTP()
-    configureRouting()
+    productRouting()
 }

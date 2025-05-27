@@ -1,5 +1,8 @@
 package com.integracion.com.integracion.stock.core.database.entity.product
 
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -13,7 +16,7 @@ object ProductTable: IntIdTable("product") {
     val categoryId = reference("id_category", CategoryTable)
     val price = decimal("price", 5, 2)
     val cost = decimal("cost", 5, 2)
-    val createdAt = datetime("created_at")
+    val createdAt = datetime("created_at").default(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()))
 }
 
 class ProductEntity(id: EntityID<Int>) : IntEntity(id) {
