@@ -50,6 +50,7 @@ fun Application.productRouting() {
                 val product = try {
                     call.receive<Product>()
                 } catch (e: ContentTransformationException) {
+                    e.printStackTrace()
                     return@post call.respond(HttpStatusCode.BadRequest, "Product malformed")
                 }
 
@@ -102,7 +103,6 @@ fun Application.productRouting() {
                         call.respond(HttpStatusCode.InternalServerError)
                     }
             }
-
         }
     }
 }
