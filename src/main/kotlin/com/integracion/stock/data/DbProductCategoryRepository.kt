@@ -16,7 +16,7 @@ object DbProductCategoryRepository : ProductCategoryRepository {
             CategoryEntity.all().map { it.toCategory() }
         }
 
-    override suspend fun getProductCategoryById(id: Int): Result<List<ProductCategory>, DataError.Remote> =
+    override suspend fun getProductCategoryById(id: Int): Result<ProductCategory, DataError.Remote> =
         safeSuspendTransaction {
             CategoryEntity.findById(id)?.toCategory() ?: emptyError("Not found")
         }

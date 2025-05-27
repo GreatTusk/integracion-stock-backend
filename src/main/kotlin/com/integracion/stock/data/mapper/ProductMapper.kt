@@ -3,6 +3,7 @@ package com.integracion.com.integracion.stock.data.mapper
 import com.integracion.com.integracion.stock.core.database.entity.product.CategoryEntity
 import com.integracion.com.integracion.stock.core.database.entity.product.ProductEntity
 import com.integracion.com.integracion.stock.domain.Product
+import com.integracion.com.integracion.stock.domain.ProductCategory
 import com.integracion.com.integracion.stock.domain.ProductCategoryRepository
 
 fun ProductEntity.toProduct() = Product(
@@ -17,7 +18,7 @@ fun ProductEntity.toProduct() = Product(
 )
 
 
-fun CategoryEntity.toCategory() = ProductCategoryRepository(
+fun CategoryEntity.toCategory() = ProductCategory(
     id = id.value,
     name = name,
     description = description

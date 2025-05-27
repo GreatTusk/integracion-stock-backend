@@ -179,6 +179,103 @@ paths:
             '*/*':
               schema:
                 type: "object"
+  /product-category:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ProductCategory"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+    post:
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductCategoryDto"
+        required: true
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Malformed category"
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductCategory"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+    /product-category/{id}:
+      get:
+        description: ""
+        parameters:
+          - name: "id"
+            in: "path"
+            required: true
+            schema:
+              type: "integer"
+        responses:
+          "400":
+            description: "Bad Request"
+            content:
+              '*/*':
+                schema:
+                  type: "string"
+                examples:
+                  Example#1:
+                    value: "Invalid id"
+          "200":
+            description: "OK"
+            content:
+              '*/*':
+                schema:
+                  $ref: "#/components/schemas/ProductCategory"
+          "500":
+            description: "Internal Server Error"
+            content:
+              '*/*':
+                schema:
+                  type: "object"
+          "404":
+            description: "Not Found"
+            content:
+              '*/*':
+                schema:
+                  type: "object"
 components:
   schemas:
     ProductCategory:
@@ -281,3 +378,13 @@ components:
         - "price"
         - "cost"
         - "categoryId"
+    ProductCategoryDto:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+      required:
+        - "name"
+        - "description"
