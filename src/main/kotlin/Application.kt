@@ -1,5 +1,6 @@
 package com.integracion
 
+import com.integracion.com.integracion.stock.controller.productCategoryRoute
 import com.integracion.com.integracion.stock.controller.productRouting
 import com.integracion.com.integracion.stock.plugin.*
 import io.ktor.server.application.*
@@ -14,5 +15,7 @@ fun Application.module() {
     configureContentNegotiation()
     configureFrameworks()
     configureHTTP()
+
     productRouting()
+    productCategoryRoute()
 }

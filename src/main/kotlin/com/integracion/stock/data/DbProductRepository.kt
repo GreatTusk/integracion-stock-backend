@@ -10,6 +10,8 @@ import com.integracion.com.integracion.stock.core.database.util.safeSuspendTrans
 import com.integracion.com.integracion.stock.data.mapper.toProduct
 import com.integracion.com.integracion.stock.domain.Product
 import com.integracion.com.integracion.stock.domain.ProductRepository
+import com.integracion.com.integracion.stock.service.ProductDto
+import com.integracion.com.integracion.stock.service.ProductUpdateDto
 
 object DbProductRepository : ProductRepository {
     override suspend fun getAllProducts(): Result<List<Product>, DataError.Remote> = safeSuspendTransaction {
@@ -20,7 +22,7 @@ object DbProductRepository : ProductRepository {
         ProductEntity.findById(productId)?.toProduct() ?: emptyError("Not found")
     }
 
-    override suspend fun createProduct(product: Product): Result<Product, DataError.Remote> = safeSuspendTransaction {
+    override suspend fun createProduct(product: ProductDto): Result<Product, DataError.Remote> = safeSuspendTransaction {
         ProductEntity.new {
             name = product.name
             sku = product.sku
@@ -28,28 +30,25 @@ object DbProductRepository : ProductRepository {
             price = product.price.toBigDecimal()
             description = product.description
 
-            val categoryExists = CategoryEntity.findById(product.id)
+            val categoryEntity = CategoryEntity.findById(product.categoryId)
 
-            if (categoryExists == null) {
-                category = CategoryEntity.new {
-                    name = product.category.name
-                    description = product.category.description
-                }
+            if (categoryEntity != null) {
+                category = categoryEntity
             } else {
-                category = categoryExists
+                emptyError("Not found")
             }
         }.toProduct()
     }
 
-    override suspend fun updateProduct(product: Product): Result<Product, DataError.Remote> = safeSuspendTransaction {
+    override suspend fun updateProduct(product: ProductUpdateDto): Result<Product, DataError.Remote> = safeSuspendTransaction {
         ProductEntity.findByIdAndUpdate(product.id) {
             it.name = product.name
             it.sku = product.sku
             it.cost = product.cost.toBigDecimal()
             it.price = product.price.toBigDecimal()
             it.description = product.description
-            if (it.category.id.value != product.category.id) {
-                val categoryEntity = CategoryEntity.findById(product.category.id)
+            if (it.category.id.value != product.categoryId) {
+                val categoryEntity = CategoryEntity.findById(product.categoryId)
                 categoryEntity?.let { category ->
                     it.category = category
                 }

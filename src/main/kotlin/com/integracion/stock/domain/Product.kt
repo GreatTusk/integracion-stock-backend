@@ -12,7 +12,7 @@ data class Product(
     val price: Int,
     val cost: Int,
     val createdAt: LocalDateTime,
-    val category: ProductCategory
+    val category: ProductCategoryRepository
 )
 
 @Serializable
