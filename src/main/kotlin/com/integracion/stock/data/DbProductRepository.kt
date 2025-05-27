@@ -26,8 +26,8 @@ object DbProductRepository : ProductRepository {
         ProductEntity.new {
             name = product.name
             sku = product.sku
-            cost = product.cost.toBigDecimal()
-            price = product.price.toBigDecimal()
+            cost = product.cost
+            price = product.price
             description = product.description
 
             val categoryEntity = CategoryEntity.findById(product.categoryId)
@@ -44,8 +44,8 @@ object DbProductRepository : ProductRepository {
         ProductEntity.findByIdAndUpdate(product.id) {
             it.name = product.name
             it.sku = product.sku
-            it.cost = product.cost.toBigDecimal()
-            it.price = product.price.toBigDecimal()
+            it.cost = product.cost
+            it.price = product.price
             it.description = product.description
             if (it.category.id.value != product.categoryId) {
                 val categoryEntity = CategoryEntity.findById(product.categoryId)

@@ -9,13 +9,13 @@ import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.kotlin.datetime.datetime
 
-object ProductTable: IntIdTable("product") {
+object ProductTable : IntIdTable("product") {
     val sku = varchar("sku", 50).uniqueIndex()
     val name = varchar("name", 50)
     val description = text("description")
     val categoryId = reference("id_category", CategoryTable)
-    val price = decimal("price", 5, 2)
-    val cost = decimal("cost", 5, 2)
+    val price = integer("price")
+    val cost = integer("cost")
     val createdAt = datetime("created_at").default(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()))
 }
 
