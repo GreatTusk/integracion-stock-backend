@@ -1,21 +1,23 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.local
     ports:
       - "8080:8080"
     depends_on:
-      postgres:
+      db:
         condition: service_healthy
-  postgres:
+  db:
     image: postgres
-    container_name: stock
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: stock
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-volumes:
-  postgres_data:
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 1s

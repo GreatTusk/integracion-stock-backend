@@ -2,6 +2,12 @@
 
 This project was created using the [Ktor Project Generator](https://start.ktor.io).
 
+## Run production docker
+docker run -p 8080:8080 --env-file .env integracion-backend
+
+## Run locally for development
+docker compose up
+
 Here are some useful links to get you started:
 
 - [Ktor Documentation](https://ktor.io/docs/home.html)
@@ -13,7 +19,7 @@ Here are some useful links to get you started:
 Here's a list of features included in this project:
 
 | Name                                                                   | Description                                                                        |
-| ------------------------------------------------------------------------|------------------------------------------------------------------------------------ |
+|------------------------------------------------------------------------|------------------------------------------------------------------------------------|
 | [Routing](https://start.ktor.io/p/routing)                             | Provides a structured routing DSL                                                  |
 | [Authentication](https://start.ktor.io/p/auth)                         | Provides extension point for handling the Authorization header                     |
 | [Koin](https://start.ktor.io/p/koin)                                   | Provides dependency injection                                                      |
@@ -29,7 +35,7 @@ Here's a list of features included in this project:
 To build or run the project, use one of the following tasks:
 
 | Task                          | Description                                                          |
-| -------------------------------|---------------------------------------------------------------------- |
+|-------------------------------|----------------------------------------------------------------------|
 | `./gradlew test`              | Run the tests                                                        |
 | `./gradlew build`             | Build everything                                                     |
 | `buildFatJar`                 | Build an executable JAR of the server with all dependencies included |

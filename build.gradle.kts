@@ -1,3 +1,5 @@
+import io.ktor.plugin.features.*
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
@@ -23,10 +25,10 @@ java {
 
 ktor {
     docker {
+        customBaseImage = "openjdk:17-slim"
         jreVersion.set(JavaVersion.VERSION_17)
-        localImageName.set("integracion")
+        localImageName.set("integracion-backend")
         imageTag.set("latest")
-        environmentVariables
     }
 }
 

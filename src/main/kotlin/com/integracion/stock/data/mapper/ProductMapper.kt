@@ -11,8 +11,8 @@ fun ProductEntity.toProduct() = Product(
     sku = sku,
     name = name,
     description = description,
-    price = price.toInt(),
-    cost = cost.toInt(),
+    price = price,
+    cost = cost,
     createdAt = createdAt,
     category = category.toCategory()
 )
