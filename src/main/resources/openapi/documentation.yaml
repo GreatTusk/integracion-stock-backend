@@ -17,7 +17,7 @@ paths:
               schema:
                 type: "array"
                 items:
-                  $ref: "#/components/schemas/Product"
+                  $ref: "#/components/schemas/ProductDto"
         "404":
           description: "Not Found"
           content:
@@ -53,7 +53,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/Product"
+                $ref: "#/components/schemas/ProductDto"
         "404":
           description: "Not Found"
           content:
@@ -89,7 +89,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/Product"
+                $ref: "#/components/schemas/ProductDto"
         "404":
           description: "Not Found"
           content:
@@ -128,7 +128,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/Product"
+                $ref: "#/components/schemas/ProductDto"
         "500":
           description: "Internal Server Error"
           content:
@@ -239,65 +239,260 @@ paths:
             '*/*':
               schema:
                 type: "object"
-    /product-category/{id}:
-      get:
-        description: ""
-        parameters:
-          - name: "id"
-            in: "path"
-            required: true
+  /product-category/{id}:
+    get:
+      description: ""
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Invalid id"
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProductCategory"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /inventory:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/InventoryDto"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+    put:
+      description: ""
+      requestBody:
+        content:
+          application/json:
             schema:
-              type: "integer"
-        responses:
-          "400":
-            description: "Bad Request"
-            content:
-              '*/*':
-                schema:
-                  type: "string"
-                examples:
-                  Example#1:
-                    value: "Invalid id"
-          "200":
-            description: "OK"
-            content:
-              '*/*':
-                schema:
-                  $ref: "#/components/schemas/ProductCategory"
-          "500":
-            description: "Internal Server Error"
-            content:
-              '*/*':
-                schema:
-                  type: "object"
-          "404":
-            description: "Not Found"
-            content:
-              '*/*':
-                schema:
-                  type: "object"
+              $ref: "#/components/schemas/InventoryUpdateDto"
+        required: true
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Inventory data malformed"
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/InventoryDto"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+    post:
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InventoryDto"
+        required: true
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Inventory data malformed"
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/InventoryDto"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /inventory/product/{productId}:
+    get:
+      description: ""
+      parameters:
+        - name: "productId"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Product id is not valid"
+                Example#2:
+                  value: "Missing product id"
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/InventoryDto"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /inventory/{id}:
+    get:
+      description: ""
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Id is not valid"
+                Example#2:
+                  value: "Missing id"
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/InventoryDto"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+    delete:
+      description: ""
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Id is not valid"
+                Example#2:
+                  value: "Missing id"
+        "204":
+          description: "No Content"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
 components:
   schemas:
-    ProductCategory:
+    ProductDto:
       type: "object"
       properties:
-        id:
-          type: "integer"
-          format: "int32"
-        name:
-          type: "string"
-        description:
-          type: "string"
-      required:
-        - "id"
-        - "name"
-        - "description"
-    Product:
-      type: "object"
-      properties:
-        id:
-          type: "integer"
-          format: "int32"
         sku:
           type: "string"
         name:
@@ -310,20 +505,16 @@ components:
         cost:
           type: "integer"
           format: "int32"
-        createdAt:
-          type: "string"
-          format: "date-time"
-        category:
-          $ref: "#/components/schemas/ProductCategory"
+        categoryId:
+          type: "integer"
+          format: "int32"
       required:
-        - "id"
         - "sku"
         - "name"
         - "description"
         - "price"
         - "cost"
-        - "createdAt"
-        - "category"
+        - "categoryId"
     ProductUpdateDto:
       type: "object"
       properties:
@@ -353,31 +544,20 @@ components:
         - "price"
         - "cost"
         - "categoryId"
-    ProductDto:
+    ProductCategory:
       type: "object"
       properties:
-        sku:
-          type: "string"
+        id:
+          type: "integer"
+          format: "int32"
         name:
           type: "string"
         description:
           type: "string"
-        price:
-          type: "integer"
-          format: "int32"
-        cost:
-          type: "integer"
-          format: "int32"
-        categoryId:
-          type: "integer"
-          format: "int32"
       required:
-        - "sku"
+        - "id"
         - "name"
         - "description"
-        - "price"
-        - "cost"
-        - "categoryId"
     ProductCategoryDto:
       type: "object"
       properties:
@@ -388,3 +568,45 @@ components:
       required:
         - "name"
         - "description"
+    InventoryDto:
+      type: "object"
+      properties:
+        productId:
+          type: "integer"
+          format: "int32"
+        quantity:
+          type: "integer"
+          format: "int32"
+        minStock:
+          type: "integer"
+          format: "int32"
+        location:
+          type: "string"
+      required:
+        - "productId"
+        - "quantity"
+        - "minStock"
+        - "location"
+    InventoryUpdateDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        productId:
+          type: "integer"
+          format: "int32"
+        quantity:
+          type: "integer"
+          format: "int32"
+        minStock:
+          type: "integer"
+          format: "int32"
+        location:
+          type: "string"
+      required:
+        - "id"
+        - "productId"
+        - "quantity"
+        - "minStock"
+        - "location"

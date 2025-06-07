@@ -1,7 +1,8 @@
 package com.integracion
 
-import com.integracion.com.integracion.stock.controller.productCategoryRoute
-import com.integracion.com.integracion.stock.controller.productRouting
+import com.integracion.com.integracion.stock.controller.inventory.inventoryRouting
+import com.integracion.com.integracion.stock.controller.product.productCategoryRoute
+import com.integracion.com.integracion.stock.controller.product.productRouting
 import com.integracion.com.integracion.stock.plugin.*
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
@@ -18,4 +19,5 @@ fun Application.module() {
 
     productRouting()
     productCategoryRoute()
+    inventoryRouting()
 }

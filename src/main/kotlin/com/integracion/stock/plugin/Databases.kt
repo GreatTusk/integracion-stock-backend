@@ -2,13 +2,16 @@ package com.integracion.com.integracion.stock.plugin
 
 import MigrationUtils
 import com.integracion.com.integracion.stock.core.database.entity.customer.CustomerTable
+import com.integracion.com.integracion.stock.core.database.entity.product.CategoryEntity
 import com.integracion.com.integracion.stock.core.database.entity.product.CategoryTable
 import com.integracion.com.integracion.stock.core.database.entity.product.InventoryTable
+import com.integracion.com.integracion.stock.core.database.entity.product.ProductEntity
 import com.integracion.com.integracion.stock.core.database.entity.product.ProductTable
 import com.integracion.com.integracion.stock.core.database.entity.purchase.PurchaseItemTable
 import com.integracion.com.integracion.stock.core.database.entity.purchase.PurchaseOrderTable
 import com.integracion.com.integracion.stock.core.database.entity.supplier.SupplierTable
 import io.ktor.server.application.*
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.sql.Connection
 import java.sql.DriverManager
@@ -32,4 +35,130 @@ fun initializeDatabase() = transaction {
         PurchaseOrderTable,
         SupplierTable
     ).forEach(::exec)
+
+    initializeSampleData()
+}
+
+
+private fun initializeSampleData() = transaction {
+    val hasProducts = ProductTable.selectAll().count() > 0
+
+    if (!hasProducts) {
+        println("No products found. Creating sample data for computer store...")
+
+        // Create sample categories for a computer store
+        val laptopsCategory = CategoryEntity.new {
+            name = "Laptops"
+            description = "Portable computers including gaming, business, and ultrabooks"
+        }
+
+        val componentsCategory = CategoryEntity.new {
+            name = "Components"
+            description = "Computer parts like CPUs, GPUs, motherboards, and RAM"
+        }
+
+        val peripheralsCategory = CategoryEntity.new {
+            name = "Peripherals"
+            description = "Keyboards, mice, headsets, and other computer accessories"
+        }
+
+        val networkingCategory = CategoryEntity.new {
+            name = "Networking"
+            description = "Routers, switches, access points, and networking cables"
+        }
+
+        // Create sample products in Laptops category
+        ProductEntity.new {
+            name = "Gaming Laptop Pro X"
+            sku = "LAP-GAM-001"
+            description = "High-performance gaming laptop with RTX 3080, 32GB RAM and 1TB NVMe SSD"
+            category = laptopsCategory
+            price = 219900
+            cost = 179900
+        }
+
+        ProductEntity.new {
+            name = "Ultrabook Air 13"
+            sku = "LAP-ULT-002"
+            description = "Ultra-thin laptop with 16GB RAM, 512GB SSD and 14-hour battery life"
+            category = laptopsCategory
+            price = 149900
+            cost = 119900
+        }
+
+        ProductEntity.new {
+            name = "Business Notebook Pro"
+            sku = "LAP-BUS-003"
+            description = "Business-grade laptop with security features, 16GB RAM and 512GB SSD"
+            category = laptopsCategory
+            price = 129900
+            cost = 99900
+        }
+
+        // Create sample products in Components category
+        ProductEntity.new {
+            name = "GeForce RTX 4070 Ti"
+            sku = "COMP-GPU-001"
+            description = "High-end graphics card for gaming and content creation"
+            category = componentsCategory
+            price = 89900
+            cost = 69900
+        }
+
+        ProductEntity.new {
+            name = "AMD Ryzen 9 5950X"
+            sku = "COMP-CPU-002"
+            description = "16-core desktop processor for extreme performance"
+            category = componentsCategory
+            price = 59900
+            cost = 42900
+        }
+
+        ProductEntity.new {
+            name = "32GB DDR5 RAM Kit"
+            sku = "COMP-RAM-003"
+            description = "High-speed memory kit (2x16GB) 6000MHz CL36"
+            category = componentsCategory
+            price = 24900
+            cost = 18900
+        }
+
+        // Create sample products in Peripherals category
+        ProductEntity.new {
+            name = "Mechanical Gaming Keyboard"
+            sku = "PERI-KBD-001"
+            description = "RGB mechanical keyboard with hot-swappable switches"
+            category = peripheralsCategory
+            price = 12900
+            cost = 8900
+        }
+
+        ProductEntity.new {
+            name = "Wireless Gaming Mouse"
+            sku = "PERI-MOU-002"
+            description = "Ultra-light wireless gaming mouse with 20K DPI sensor"
+            category = peripheralsCategory
+            price = 8900
+            cost = 5900
+        }
+
+        // Create sample products in Networking category
+        ProductEntity.new {
+            name = "WiFi 6E Router"
+            sku = "NET-RTR-001"
+            description = "Tri-band WiFi 6E router with mesh capabilities"
+            category = networkingCategory
+            price = 29900
+            cost = 19900
+        }
+
+        ProductEntity.new {
+            name = "10Gb Network Switch"
+            sku = "NET-SWI-002"
+            description = "8-port managed 10Gb Ethernet switch for home or office"
+            category = networkingCategory
+            price = 19900
+            cost = 14900
+        }
+    }
 }
