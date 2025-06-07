@@ -4,7 +4,7 @@ import com.integracion.com.integracion.stock.controller.inventory.inventoryRouti
 import com.integracion.com.integracion.stock.controller.product.productCategoryRoute
 import com.integracion.com.integracion.stock.controller.product.productRouting
 import com.integracion.com.integracion.stock.plugin.configureContentNegotiation
-import com.integracion.com.integracion.stock.plugin.configureHTTP
+import com.integracion.com.integracion.stock.plugin.configureDocs
 import io.ktor.server.application.*
 import org.koin.dsl.module
 import org.koin.ktor.plugin.Koin
@@ -20,7 +20,7 @@ fun Application.fakeAppModule() {
             }
         )
     }
-    configureHTTP()
+    configureDocs()
     productRouting()
     productCategoryRoute()
     inventoryRouting()

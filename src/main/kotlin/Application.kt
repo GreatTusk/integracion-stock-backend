@@ -14,8 +14,9 @@ fun Application.module() {
     initializeDatabase()
 
     configureContentNegotiation()
-    configureFrameworks()
-    configureHTTP()
+    configureKoin()
+    configureDocs()
+    configureRateLimit()
 
     productRouting()
     productCategoryRoute()

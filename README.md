@@ -2,9 +2,6 @@
 
 This project was created using the [Ktor Project Generator](https://start.ktor.io).
 
-## Run production docker
-docker run -p 8080:8080 --env-file .env integracion-backend
-
 ## Run locally for development
 docker compose up
 
