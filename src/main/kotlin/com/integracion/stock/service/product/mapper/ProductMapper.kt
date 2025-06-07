@@ -1,7 +1,6 @@
 package com.integracion.com.integracion.stock.service.product.mapper
 
 import com.integracion.com.integracion.stock.domain.product.Product
-import com.integracion.com.integracion.stock.service.product.CreateProductDto
 import com.integracion.com.integracion.stock.service.product.GetProductDto
 
 internal fun Product.toProductDto(): GetProductDto {

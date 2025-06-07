@@ -3,7 +3,7 @@ package com.integracion.com.integracion.stock.controller.product
 import com.integracion.com.integracion.stock.core.common.onEmpty
 import com.integracion.com.integracion.stock.core.common.onError
 import com.integracion.com.integracion.stock.core.common.onSuccess
-import com.integracion.com.integracion.stock.service.product.CreateProductDto
+import com.integracion.com.integracion.stock.service.product.PostProductDto
 import com.integracion.com.integracion.stock.service.product.ProductService
 import com.integracion.com.integracion.stock.service.product.GetProductDto
 import io.ktor.http.*
@@ -49,7 +49,7 @@ fun Application.productRouting() {
             }
             post {
                 val product = try {
-                    call.receive<CreateProductDto>()
+                    call.receive<PostProductDto>()
                 } catch (e: ContentTransformationException) {
                     e.printStackTrace()
                     return@post call.respond(HttpStatusCode.BadRequest, "Product malformed")

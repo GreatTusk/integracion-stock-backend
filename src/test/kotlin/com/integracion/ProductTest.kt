@@ -1,6 +1,6 @@
 package com.integracion
 
-import com.integracion.com.integracion.stock.service.product.CreateProductDto
+import com.integracion.com.integracion.stock.service.product.PostProductDto
 import com.integracion.com.integracion.stock.service.product.GetProductDto
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -80,7 +80,7 @@ class ProductTest {
 
         val categoryId = products.first().categoryId
 
-        val newProduct = CreateProductDto(
+        val newProduct = PostProductDto(
             sku = "TEST-SKU-001",
             name = "Test Product",
             description = "This is a test product",
@@ -149,7 +149,7 @@ class ProductTest {
         val categoryId = products.first().categoryId
 
         // Create a new product specifically for deletion
-        val testProduct = CreateProductDto(
+        val testProduct = PostProductDto(
             sku = "TEST-DELETE-SKU",
             name = "Test Product for Deletion",
             description = "This product will be deleted",

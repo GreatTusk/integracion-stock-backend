@@ -3,9 +3,9 @@ package com.integracion.com.integracion.stock.controller.inventory
 import com.integracion.com.integracion.stock.core.common.onEmpty
 import com.integracion.com.integracion.stock.core.common.onError
 import com.integracion.com.integracion.stock.core.common.onSuccess
-import com.integracion.com.integracion.stock.service.inventory.InventoryDto
+import com.integracion.com.integracion.stock.service.inventory.GetInventoryDto
 import com.integracion.com.integracion.stock.service.inventory.InventoryService
-import com.integracion.com.integracion.stock.service.inventory.InventoryUpdateDto
+import com.integracion.com.integracion.stock.service.inventory.PostInventoryDto
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -69,7 +69,7 @@ fun Application.inventoryRouting() {
 
             post {
                 val inventory = try {
-                    call.receive<InventoryDto>()
+                    call.receive<PostInventoryDto>()
                 } catch (e: ContentTransformationException) {
                     e.printStackTrace()
                     return@post call.respond(HttpStatusCode.BadRequest, "Inventory data malformed")
@@ -89,7 +89,7 @@ fun Application.inventoryRouting() {
 
             put {
                 val inventory = try {
-                    call.receive<InventoryUpdateDto>()
+                    call.receive<PostInventoryDto>()
                 } catch (e: ContentTransformationException) {
                     return@put call.respond(HttpStatusCode.BadRequest, "Inventory data malformed")
                 }

@@ -1,14 +1,15 @@
 package com.integracion.com.integracion.stock.service.inventory.mapper
 
 import com.integracion.com.integracion.stock.domain.inventory.Inventory
-import com.integracion.com.integracion.stock.service.inventory.InventoryDto
+import com.integracion.com.integracion.stock.service.inventory.GetInventoryDto
 
 
-internal fun Inventory.toInventoryDto(): InventoryDto {
-    return InventoryDto(
+internal fun Inventory.toInventoryDto(): GetInventoryDto {
+    return GetInventoryDto(
         productId = this.product.id,
         quantity = this.quantity,
         minStock = this.minStock,
-        location = this.location
+        location = this.location,
+        lastUpdated = this.lastUpdated
     )
 }

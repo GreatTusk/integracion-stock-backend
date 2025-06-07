@@ -10,7 +10,7 @@ import com.integracion.com.integracion.stock.core.database.util.safeSuspendTrans
 import com.integracion.com.integracion.stock.data.product.mapper.toProduct
 import com.integracion.com.integracion.stock.domain.product.Product
 import com.integracion.com.integracion.stock.domain.product.ProductRepository
-import com.integracion.com.integracion.stock.service.product.CreateProductDto
+import com.integracion.com.integracion.stock.service.product.PostProductDto
 import com.integracion.com.integracion.stock.service.product.GetProductDto
 
 object DbProductRepository : ProductRepository {
@@ -22,7 +22,7 @@ object DbProductRepository : ProductRepository {
         ProductEntity.findById(productId)?.toProduct() ?: emptyError("Not found")
     }
 
-    override suspend fun createProduct(product: CreateProductDto): Result<Product, DataError.Remote> = safeSuspendTransaction {
+    override suspend fun createProduct(product: PostProductDto): Result<Product, DataError.Remote> = safeSuspendTransaction {
         ProductEntity.new {
             name = product.name
             sku = product.sku

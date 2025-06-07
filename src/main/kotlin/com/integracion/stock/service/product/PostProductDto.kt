@@ -3,7 +3,7 @@ package com.integracion.com.integracion.stock.service.product
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateProductDto(
+data class PostProductDto(
     val sku: String,
     val name: String,
     val description: String,

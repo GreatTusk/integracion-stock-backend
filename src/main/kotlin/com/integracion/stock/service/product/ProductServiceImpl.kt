@@ -21,7 +21,7 @@ class ProductServiceImpl(
         return productRepository.getProductById(productId).map { it.toProductDto() }
     }
 
-    override suspend fun createProduct(product: CreateProductDto): Result<GetProductDto, DataError.Remote> {
+    override suspend fun createProduct(product: PostProductDto): Result<GetProductDto, DataError.Remote> {
         return productRepository.createProduct(product).map { it.toProductDto() }
     }
 
