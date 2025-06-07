@@ -10,8 +10,8 @@ import com.integracion.com.integracion.stock.core.database.util.safeSuspendTrans
 import com.integracion.com.integracion.stock.data.product.mapper.toProduct
 import com.integracion.com.integracion.stock.domain.product.Product
 import com.integracion.com.integracion.stock.domain.product.ProductRepository
-import com.integracion.com.integracion.stock.service.product.ProductDto
-import com.integracion.com.integracion.stock.service.product.ProductUpdateDto
+import com.integracion.com.integracion.stock.service.product.CreateProductDto
+import com.integracion.com.integracion.stock.service.product.GetProductDto
 
 object DbProductRepository : ProductRepository {
     override suspend fun getAllProducts(): Result<List<Product>, DataError.Remote> = safeSuspendTransaction {
@@ -22,7 +22,7 @@ object DbProductRepository : ProductRepository {
         ProductEntity.findById(productId)?.toProduct() ?: emptyError("Not found")
     }
 
-    override suspend fun createProduct(product: ProductDto): Result<Product, DataError.Remote> = safeSuspendTransaction {
+    override suspend fun createProduct(product: CreateProductDto): Result<Product, DataError.Remote> = safeSuspendTransaction {
         ProductEntity.new {
             name = product.name
             sku = product.sku
@@ -40,7 +40,7 @@ object DbProductRepository : ProductRepository {
         }.toProduct()
     }
 
-    override suspend fun updateProduct(product: ProductUpdateDto): Result<Product, DataError.Remote> = safeSuspendTransaction {
+    override suspend fun updateProduct(product: GetProductDto): Result<Product, DataError.Remote> = safeSuspendTransaction {
         ProductEntity.findByIdAndUpdate(product.id) {
             it.name = product.name
             it.sku = product.sku

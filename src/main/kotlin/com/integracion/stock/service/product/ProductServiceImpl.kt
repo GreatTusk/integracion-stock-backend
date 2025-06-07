@@ -11,21 +11,21 @@ class ProductServiceImpl(
     private val productRepository: ProductRepository
 ) : ProductService {
 
-    override suspend fun getAllProducts(): Result<List<ProductDto>, DataError.Remote> {
+    override suspend fun getAllProducts(): Result<List<GetProductDto>, DataError.Remote> {
         return productRepository.getAllProducts().map { productList ->
             productList.map { it.toProductDto() }
         }
     }
 
-    override suspend fun getProductById(productId: Int): Result<ProductDto, DataError.Remote> {
+    override suspend fun getProductById(productId: Int): Result<GetProductDto, DataError.Remote> {
         return productRepository.getProductById(productId).map { it.toProductDto() }
     }
 
-    override suspend fun createProduct(product: ProductDto): Result<ProductDto, DataError.Remote> {
+    override suspend fun createProduct(product: CreateProductDto): Result<GetProductDto, DataError.Remote> {
         return productRepository.createProduct(product).map { it.toProductDto() }
     }
 
-    override suspend fun updateProduct(product: ProductUpdateDto): Result<ProductDto, DataError.Remote> {
+    override suspend fun updateProduct(product: GetProductDto): Result<GetProductDto, DataError.Remote> {
         return productRepository.updateProduct(product).map { it.toProductDto() }
     }
 
