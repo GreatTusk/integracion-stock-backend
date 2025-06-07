@@ -1,5 +1,6 @@
-package com.integracion
+package com.integracion.com.integracion.stock.data
 
+import com.integracion.com.integracion.stock.fake.fakeAppModule
 import com.integracion.com.integracion.stock.service.product.PostProductDto
 import com.integracion.com.integracion.stock.service.product.GetProductDto
 import io.ktor.client.request.*
@@ -15,16 +16,8 @@ import kotlin.test.assertTrue
 class ProductTest {
 
     private fun ApplicationTestBuilder.setup() {
-        environment {
-            // Add test configuration for PostgreSQL
-            config = MapApplicationConfig().apply {
-                put("postgres.url", "jdbc:postgresql://localhost:5432/stock")
-                put("postgres.user", "postgres")
-                put("postgres.password", "password")
-            }
-        }
         application {
-            module()
+            fakeAppModule()
         }
 
     }

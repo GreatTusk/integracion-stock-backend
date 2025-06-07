@@ -1,5 +1,6 @@
 package com.integracion
 
+import com.integracion.com.integracion.stock.fake.fakeAppModule
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
@@ -11,7 +12,7 @@ class ApplicationTest {
     @Test
     fun testRoot() = testApplication {
         application {
-            module()
+            fakeAppModule()
         }
         client.get("/").apply {
             assertEquals(HttpStatusCode.NotFound, status)

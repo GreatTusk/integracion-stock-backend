@@ -1,5 +1,6 @@
-package com.integracion
+package com.integracion.com.integracion.stock.data
 
+import com.integracion.com.integracion.stock.fake.fakeAppModule
 import com.integracion.com.integracion.stock.service.inventory.GetInventoryDto
 import com.integracion.com.integracion.stock.service.inventory.PostInventoryDto
 import com.integracion.com.integracion.stock.service.product.GetProductDto
@@ -16,16 +17,8 @@ import kotlin.test.assertTrue
 class InventoryTest {
 
     private fun ApplicationTestBuilder.setup() {
-        environment {
-            // Add test configuration for PostgreSQL
-            config = MapApplicationConfig().apply {
-                put("postgres.url", "jdbc:postgresql://localhost:5432/stock")
-                put("postgres.user", "postgres")
-                put("postgres.password", "password")
-            }
-        }
         application {
-            module()
+            fakeAppModule()
         }
     }
 
@@ -92,6 +85,7 @@ class InventoryTest {
         setup()
 
         client.get("/inventory/-1").apply {
+            println()
             assertEquals(HttpStatusCode.NotFound, status)
         }
     }
