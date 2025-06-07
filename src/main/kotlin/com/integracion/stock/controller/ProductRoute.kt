@@ -3,8 +3,8 @@ package com.integracion.com.integracion.stock.controller
 import com.integracion.com.integracion.stock.core.common.onEmpty
 import com.integracion.com.integracion.stock.core.common.onError
 import com.integracion.com.integracion.stock.core.common.onSuccess
-import com.integracion.com.integracion.stock.domain.ProductRepository
 import com.integracion.com.integracion.stock.service.ProductDto
+import com.integracion.com.integracion.stock.service.ProductService
 import com.integracion.com.integracion.stock.service.ProductUpdateDto
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -14,12 +14,12 @@ import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 
 fun Application.productRouting() {
-    val productRepository by inject<ProductRepository>()
+    val productService by inject<ProductService>()
 
     routing {
         route("/products") {
             get {
-                productRepository.getAllProducts()
+                productService.getAllProducts()
                     .onSuccess {
                         call.respond(it)
                     }
@@ -36,7 +36,7 @@ fun Application.productRouting() {
                 val productId =
                     id.toIntOrNull() ?: return@get call.respond(HttpStatusCode.BadRequest, "Id is not valid")
 
-                productRepository.getProductById(productId)
+                productService.getProductById(productId)
                     .onSuccess {
                         call.respond(it)
                     }
@@ -55,7 +55,7 @@ fun Application.productRouting() {
                     return@post call.respond(HttpStatusCode.BadRequest, "Product malformed")
                 }
 
-                productRepository.createProduct(product)
+                productService.createProduct(product)
                     .onSuccess {
                         call.respond(HttpStatusCode.Created, it)
                     }
@@ -75,7 +75,7 @@ fun Application.productRouting() {
                     return@put call.respond(HttpStatusCode.BadRequest, "Product malformed")
                 }
 
-                productRepository.updateProduct(product)
+                productService.updateProduct(product)
                     .onSuccess {
                         call.respond(HttpStatusCode.OK, it)
                     }
@@ -93,7 +93,7 @@ fun Application.productRouting() {
                 val productId =
                     id.toIntOrNull() ?: return@delete call.respond(HttpStatusCode.BadRequest, "Id is not valid")
 
-                productRepository.deleteProduct(productId)
+                productService.deleteProduct(productId)
                     .onSuccess {
                         call.respond(HttpStatusCode.NoContent)
                     }
