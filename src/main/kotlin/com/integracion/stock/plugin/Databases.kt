@@ -4,6 +4,7 @@ import MigrationUtils
 import com.integracion.com.integracion.stock.core.database.entity.customer.CustomerTable
 import com.integracion.com.integracion.stock.core.database.entity.product.CategoryEntity
 import com.integracion.com.integracion.stock.core.database.entity.product.CategoryTable
+import com.integracion.com.integracion.stock.core.database.entity.product.InventoryEntity
 import com.integracion.com.integracion.stock.core.database.entity.product.InventoryTable
 import com.integracion.com.integracion.stock.core.database.entity.product.ProductEntity
 import com.integracion.com.integracion.stock.core.database.entity.product.ProductTable
@@ -68,7 +69,7 @@ private fun initializeSampleData() = transaction {
         }
 
         // Create sample products in Laptops category
-        ProductEntity.new {
+        val gamingLaptop = ProductEntity.new {
             name = "Gaming Laptop Pro X"
             sku = "LAP-GAM-001"
             description = "High-performance gaming laptop with RTX 3080, 32GB RAM and 1TB NVMe SSD"
@@ -77,7 +78,7 @@ private fun initializeSampleData() = transaction {
             cost = 179900
         }
 
-        ProductEntity.new {
+        val ultrabook = ProductEntity.new {
             name = "Ultrabook Air 13"
             sku = "LAP-ULT-002"
             description = "Ultra-thin laptop with 16GB RAM, 512GB SSD and 14-hour battery life"
@@ -86,7 +87,7 @@ private fun initializeSampleData() = transaction {
             cost = 119900
         }
 
-        ProductEntity.new {
+        val businessLaptop = ProductEntity.new {
             name = "Business Notebook Pro"
             sku = "LAP-BUS-003"
             description = "Business-grade laptop with security features, 16GB RAM and 512GB SSD"
@@ -96,7 +97,7 @@ private fun initializeSampleData() = transaction {
         }
 
         // Create sample products in Components category
-        ProductEntity.new {
+        val graphicsCard = ProductEntity.new {
             name = "GeForce RTX 4070 Ti"
             sku = "COMP-GPU-001"
             description = "High-end graphics card for gaming and content creation"
@@ -105,7 +106,7 @@ private fun initializeSampleData() = transaction {
             cost = 69900
         }
 
-        ProductEntity.new {
+        val processor = ProductEntity.new {
             name = "AMD Ryzen 9 5950X"
             sku = "COMP-CPU-002"
             description = "16-core desktop processor for extreme performance"
@@ -114,7 +115,7 @@ private fun initializeSampleData() = transaction {
             cost = 42900
         }
 
-        ProductEntity.new {
+        val ramKit = ProductEntity.new {
             name = "32GB DDR5 RAM Kit"
             sku = "COMP-RAM-003"
             description = "High-speed memory kit (2x16GB) 6000MHz CL36"
@@ -124,7 +125,7 @@ private fun initializeSampleData() = transaction {
         }
 
         // Create sample products in Peripherals category
-        ProductEntity.new {
+        val keyboard = ProductEntity.new {
             name = "Mechanical Gaming Keyboard"
             sku = "PERI-KBD-001"
             description = "RGB mechanical keyboard with hot-swappable switches"
@@ -133,7 +134,7 @@ private fun initializeSampleData() = transaction {
             cost = 8900
         }
 
-        ProductEntity.new {
+        val mouse = ProductEntity.new {
             name = "Wireless Gaming Mouse"
             sku = "PERI-MOU-002"
             description = "Ultra-light wireless gaming mouse with 20K DPI sensor"
@@ -143,7 +144,7 @@ private fun initializeSampleData() = transaction {
         }
 
         // Create sample products in Networking category
-        ProductEntity.new {
+        val router = ProductEntity.new {
             name = "WiFi 6E Router"
             sku = "NET-RTR-001"
             description = "Tri-band WiFi 6E router with mesh capabilities"
@@ -152,7 +153,7 @@ private fun initializeSampleData() = transaction {
             cost = 19900
         }
 
-        ProductEntity.new {
+        val networkSwitch = ProductEntity.new {
             name = "10Gb Network Switch"
             sku = "NET-SWI-002"
             description = "8-port managed 10Gb Ethernet switch for home or office"
@@ -160,5 +161,81 @@ private fun initializeSampleData() = transaction {
             price = 19900
             cost = 14900
         }
+
+        // Laptop inventory records - store in "Main Showroom"
+        InventoryEntity.new {
+            product = gamingLaptop
+            quantity = 15
+            minStock = 5
+            location = "Main Showroom"
+        }
+
+        InventoryEntity.new {
+            product = ultrabook
+            quantity = 25
+            minStock = 10
+            location = "Main Showroom"
+        }
+
+        InventoryEntity.new {
+            product = businessLaptop
+            quantity = 20
+            minStock = 8
+            location = "Main Showroom"
+        }
+
+        // Component inventory records - store in "Components Section"
+        InventoryEntity.new {
+            product = graphicsCard
+            quantity = 12
+            minStock = 3
+            location = "Components Section"
+        }
+
+        InventoryEntity.new {
+            product = processor
+            quantity = 18
+            minStock = 5
+            location = "Components Section"
+        }
+
+        InventoryEntity.new {
+            product = ramKit
+            quantity = 35
+            minStock = 15
+            location = "Components Section"
+        }
+
+        // Peripheral inventory records - store in "Accessories Area"
+        InventoryEntity.new {
+            product = keyboard
+            quantity = 50
+            minStock = 20
+            location = "Accessories Area"
+        }
+
+        InventoryEntity.new {
+            product = mouse
+            quantity = 65
+            minStock = 25
+            location = "Accessories Area"
+        }
+
+        // Networking inventory records - store in "Networking Corner"
+        InventoryEntity.new {
+            product = router
+            quantity = 22
+            minStock = 8
+            location = "Networking Corner"
+        }
+
+        InventoryEntity.new {
+            product = networkSwitch
+            quantity = 17
+            minStock = 6
+            location = "Networking Corner"
+        }
+
+        println("Successfully created inventory records for all products.")
     }
 }
