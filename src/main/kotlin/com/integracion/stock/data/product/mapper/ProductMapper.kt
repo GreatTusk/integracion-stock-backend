@@ -1,10 +1,9 @@
-package com.integracion.com.integracion.stock.data.mapper
+package com.integracion.com.integracion.stock.data.product.mapper
 
 import com.integracion.com.integracion.stock.core.database.entity.product.CategoryEntity
 import com.integracion.com.integracion.stock.core.database.entity.product.ProductEntity
-import com.integracion.com.integracion.stock.domain.Product
-import com.integracion.com.integracion.stock.domain.ProductCategory
-import com.integracion.com.integracion.stock.domain.ProductCategoryRepository
+import com.integracion.com.integracion.stock.domain.product.Product
+import com.integracion.com.integracion.stock.domain.product.ProductCategory
 
 fun ProductEntity.toProduct() = Product(
     id = id.value,

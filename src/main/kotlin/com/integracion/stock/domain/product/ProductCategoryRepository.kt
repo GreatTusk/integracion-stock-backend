@@ -1,8 +1,8 @@
-package com.integracion.com.integracion.stock.domain
+package com.integracion.com.integracion.stock.domain.product
 
 import com.integracion.com.integracion.stock.core.common.DataError
 import com.integracion.com.integracion.stock.core.common.Result
-import com.integracion.com.integracion.stock.service.ProductCategoryDto
+import com.integracion.com.integracion.stock.service.product.ProductCategoryDto
 
 interface ProductCategoryRepository {
     suspend fun getAllProductCategories(): Result<List<ProductCategory>, DataError.Remote>

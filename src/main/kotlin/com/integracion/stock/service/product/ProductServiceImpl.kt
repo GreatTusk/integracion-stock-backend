@@ -1,12 +1,11 @@
-package com.integracion.com.integracion.stock.service
+package com.integracion.com.integracion.stock.service.product
 
 import com.integracion.com.integracion.stock.core.common.DataError
 import com.integracion.com.integracion.stock.core.common.EmptyResult
 import com.integracion.com.integracion.stock.core.common.Result
 import com.integracion.com.integracion.stock.core.common.map
-import com.integracion.com.integracion.stock.domain.Product
-import com.integracion.com.integracion.stock.domain.ProductRepository
-import com.integracion.com.integracion.stock.service.mapper.toProductDto
+import com.integracion.com.integracion.stock.domain.product.ProductRepository
+import com.integracion.com.integracion.stock.service.product.mapper.toProductDto
 
 class ProductServiceImpl(
     private val productRepository: ProductRepository

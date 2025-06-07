@@ -1,4 +1,4 @@
-package com.integracion.com.integracion.stock.service
+package com.integracion.com.integracion.stock.service.product
 
 import kotlinx.serialization.Serializable
 

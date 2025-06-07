@@ -1,4 +1,4 @@
-package com.integracion.com.integracion.stock.data
+package com.integracion.com.integracion.stock.data.product
 
 import com.integracion.com.integracion.stock.core.common.DataError
 import com.integracion.com.integracion.stock.core.common.EmptyResult
@@ -7,11 +7,11 @@ import com.integracion.com.integracion.stock.core.common.emptyError
 import com.integracion.com.integracion.stock.core.database.entity.product.CategoryEntity
 import com.integracion.com.integracion.stock.core.database.entity.product.ProductEntity
 import com.integracion.com.integracion.stock.core.database.util.safeSuspendTransaction
-import com.integracion.com.integracion.stock.data.mapper.toProduct
-import com.integracion.com.integracion.stock.domain.Product
-import com.integracion.com.integracion.stock.domain.ProductRepository
-import com.integracion.com.integracion.stock.service.ProductDto
-import com.integracion.com.integracion.stock.service.ProductUpdateDto
+import com.integracion.com.integracion.stock.data.product.mapper.toProduct
+import com.integracion.com.integracion.stock.domain.product.Product
+import com.integracion.com.integracion.stock.domain.product.ProductRepository
+import com.integracion.com.integracion.stock.service.product.ProductDto
+import com.integracion.com.integracion.stock.service.product.ProductUpdateDto
 
 object DbProductRepository : ProductRepository {
     override suspend fun getAllProducts(): Result<List<Product>, DataError.Remote> = safeSuspendTransaction {

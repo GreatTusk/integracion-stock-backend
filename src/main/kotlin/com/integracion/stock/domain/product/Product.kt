@@ -1,4 +1,4 @@
-package com.integracion.com.integracion.stock.domain
+package com.integracion.com.integracion.stock.domain.product
 
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable

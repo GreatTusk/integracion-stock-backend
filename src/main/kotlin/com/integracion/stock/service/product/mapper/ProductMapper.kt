@@ -1,7 +1,7 @@
-package com.integracion.com.integracion.stock.service.mapper
+package com.integracion.com.integracion.stock.service.product.mapper
 
-import com.integracion.com.integracion.stock.domain.Product
-import com.integracion.com.integracion.stock.service.ProductDto
+import com.integracion.com.integracion.stock.domain.product.Product
+import com.integracion.com.integracion.stock.service.product.ProductDto
 
 internal fun Product.toProductDto(): ProductDto {
     return ProductDto(

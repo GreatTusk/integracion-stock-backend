@@ -1,11 +1,11 @@
-package com.integracion.com.integracion.stock.controller
+package com.integracion.com.integracion.stock.controller.product
 
 import com.integracion.com.integracion.stock.core.common.onEmpty
 import com.integracion.com.integracion.stock.core.common.onError
 import com.integracion.com.integracion.stock.core.common.onSuccess
-import com.integracion.com.integracion.stock.service.ProductDto
-import com.integracion.com.integracion.stock.service.ProductService
-import com.integracion.com.integracion.stock.service.ProductUpdateDto
+import com.integracion.com.integracion.stock.service.product.ProductDto
+import com.integracion.com.integracion.stock.service.product.ProductService
+import com.integracion.com.integracion.stock.service.product.ProductUpdateDto
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*

@@ -1,10 +1,10 @@
-package com.integracion.com.integracion.stock.domain
+package com.integracion.com.integracion.stock.domain.product
 
 import com.integracion.com.integracion.stock.core.common.DataError
 import com.integracion.com.integracion.stock.core.common.EmptyResult
 import com.integracion.com.integracion.stock.core.common.Result
-import com.integracion.com.integracion.stock.service.ProductDto
-import com.integracion.com.integracion.stock.service.ProductUpdateDto
+import com.integracion.com.integracion.stock.service.product.ProductDto
+import com.integracion.com.integracion.stock.service.product.ProductUpdateDto
 
 interface ProductRepository {
     suspend fun getAllProducts(): Result<List<Product>, DataError.Remote>

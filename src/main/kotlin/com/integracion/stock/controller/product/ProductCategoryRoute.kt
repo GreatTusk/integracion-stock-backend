@@ -1,10 +1,10 @@
-package com.integracion.com.integracion.stock.controller
+package com.integracion.com.integracion.stock.controller.product
 
 import com.integracion.com.integracion.stock.core.common.onEmpty
 import com.integracion.com.integracion.stock.core.common.onError
 import com.integracion.com.integracion.stock.core.common.onSuccess
-import com.integracion.com.integracion.stock.domain.ProductCategoryRepository
-import com.integracion.com.integracion.stock.service.ProductCategoryDto
+import com.integracion.com.integracion.stock.domain.product.ProductCategoryRepository
+import com.integracion.com.integracion.stock.service.product.ProductCategoryDto
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
