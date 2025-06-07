@@ -17,7 +17,7 @@ paths:
               schema:
                 type: "array"
                 items:
-                  $ref: "#/components/schemas/ProductDto"
+                  $ref: "#/components/schemas/GetProductDto"
         "404":
           description: "Not Found"
           content:
@@ -36,7 +36,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProductUpdateDto"
+              $ref: "#/components/schemas/GetProductDto"
         required: true
       responses:
         "400":
@@ -53,7 +53,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ProductDto"
+                $ref: "#/components/schemas/GetProductDto"
         "404":
           description: "Not Found"
           content:
@@ -72,7 +72,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ProductDto"
+              $ref: "#/components/schemas/PostProductDto"
         required: true
       responses:
         "400":
@@ -89,7 +89,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ProductDto"
+                $ref: "#/components/schemas/GetProductDto"
         "404":
           description: "Not Found"
           content:
@@ -128,7 +128,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/ProductDto"
+                $ref: "#/components/schemas/GetProductDto"
         "500":
           description: "Internal Server Error"
           content:
@@ -287,7 +287,7 @@ paths:
               schema:
                 type: "array"
                 items:
-                  $ref: "#/components/schemas/InventoryDto"
+                  $ref: "#/components/schemas/GetInventoryDto"
         "404":
           description: "Not Found"
           content:
@@ -306,7 +306,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InventoryUpdateDto"
+              $ref: "#/components/schemas/PostInventoryDto"
         required: true
       responses:
         "400":
@@ -323,7 +323,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/InventoryDto"
+                $ref: "#/components/schemas/GetInventoryDto"
         "404":
           description: "Not Found"
           content:
@@ -342,7 +342,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InventoryDto"
+              $ref: "#/components/schemas/PostInventoryDto"
         required: true
       responses:
         "400":
@@ -359,7 +359,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/InventoryDto"
+                $ref: "#/components/schemas/GetInventoryDto"
         "404":
           description: "Not Found"
           content:
@@ -398,7 +398,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/InventoryDto"
+                $ref: "#/components/schemas/GetInventoryDto"
         "500":
           description: "Internal Server Error"
           content:
@@ -437,7 +437,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/InventoryDto"
+                $ref: "#/components/schemas/GetInventoryDto"
         "500":
           description: "Internal Server Error"
           content:
@@ -490,32 +490,7 @@ paths:
                 type: "object"
 components:
   schemas:
-    ProductDto:
-      type: "object"
-      properties:
-        sku:
-          type: "string"
-        name:
-          type: "string"
-        description:
-          type: "string"
-        price:
-          type: "integer"
-          format: "int32"
-        cost:
-          type: "integer"
-          format: "int32"
-        categoryId:
-          type: "integer"
-          format: "int32"
-      required:
-        - "sku"
-        - "name"
-        - "description"
-        - "price"
-        - "cost"
-        - "categoryId"
-    ProductUpdateDto:
+    GetProductDto:
       type: "object"
       properties:
         id:
@@ -538,6 +513,31 @@ components:
           format: "int32"
       required:
         - "id"
+        - "sku"
+        - "name"
+        - "description"
+        - "price"
+        - "cost"
+        - "categoryId"
+    PostProductDto:
+      type: "object"
+      properties:
+        sku:
+          type: "string"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        price:
+          type: "integer"
+          format: "int32"
+        cost:
+          type: "integer"
+          format: "int32"
+        categoryId:
+          type: "integer"
+          format: "int32"
+      required:
         - "sku"
         - "name"
         - "description"
@@ -568,7 +568,7 @@ components:
       required:
         - "name"
         - "description"
-    InventoryDto:
+    GetInventoryDto:
       type: "object"
       properties:
         productId:
@@ -582,17 +582,18 @@ components:
           format: "int32"
         location:
           type: "string"
+        lastUpdated:
+          type: "string"
+          format: "date-time"
       required:
         - "productId"
         - "quantity"
         - "minStock"
         - "location"
-    InventoryUpdateDto:
+        - "lastUpdated"
+    PostInventoryDto:
       type: "object"
       properties:
-        id:
-          type: "integer"
-          format: "int32"
         productId:
           type: "integer"
           format: "int32"
@@ -605,7 +606,6 @@ components:
         location:
           type: "string"
       required:
-        - "id"
         - "productId"
         - "quantity"
         - "minStock"
