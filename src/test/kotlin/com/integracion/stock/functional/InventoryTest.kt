@@ -1,5 +1,6 @@
-package com.integracion.com.integracion.stock.data
+package com.integracion.com.integracion.stock.functional
 
+import com.integracion.com.integracion.stock.annotations.Functional
 import com.integracion.com.integracion.stock.fake.fakeAppModule
 import com.integracion.com.integracion.stock.service.inventory.GetInventoryDto
 import com.integracion.com.integracion.stock.service.inventory.PostInventoryDto
@@ -7,7 +8,6 @@ import com.integracion.com.integracion.stock.service.product.GetProductDto
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.server.config.*
 import io.ktor.server.testing.*
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
@@ -22,6 +22,7 @@ class InventoryTest {
         }
     }
 
+    @Functional
     @Test
     fun testGetAllInventory() = testApplication {
         setup()
@@ -34,6 +35,7 @@ class InventoryTest {
         }
     }
 
+    @Functional
     @Test
     fun testGetInventoryById() = testApplication {
         setup()
@@ -57,6 +59,7 @@ class InventoryTest {
         }
     }
 
+    @Functional
     @Test
     fun testGetInventoryByProductId() = testApplication {
         setup()
@@ -80,6 +83,7 @@ class InventoryTest {
         }
     }
 
+    @Functional
     @Test
     fun testGetInventoryByInvalidId() = testApplication {
         setup()
@@ -90,6 +94,7 @@ class InventoryTest {
         }
     }
 
+    @Functional
     @Test
     fun testCreateInventory() = testApplication {
         setup()
@@ -128,6 +133,7 @@ class InventoryTest {
         }
     }
 
+    @Functional
     @Test
     fun testUpdateInventory() = testApplication {
         setup()
@@ -159,6 +165,7 @@ class InventoryTest {
         }
     }
 
+    @Functional
     @Test
     fun testDeleteInventory() = testApplication {
         setup()

@@ -1,5 +1,6 @@
-package com.integracion.com.integracion.stock.controller
+package com.integracion.com.integracion.stock.endtoend
 
+import com.integracion.com.integracion.stock.annotations.EndToEnd
 import com.integracion.com.integracion.stock.service.inventory.GetInventoryDto
 import com.integracion.com.integracion.stock.service.inventory.PostInventoryDto
 import com.integracion.com.integracion.stock.service.product.GetProductDto
@@ -14,8 +15,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
+@EndToEnd
 class InventoryTest {
-
     private fun ApplicationTestBuilder.setup() {
         environment {
             // Add test configuration for PostgreSQL

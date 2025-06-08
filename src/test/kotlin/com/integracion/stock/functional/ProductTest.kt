@@ -1,12 +1,12 @@
-package com.integracion.com.integracion.stock.data
+package com.integracion.com.integracion.stock.functional
 
+import com.integracion.com.integracion.stock.annotations.Functional
 import com.integracion.com.integracion.stock.fake.fakeAppModule
-import com.integracion.com.integracion.stock.service.product.PostProductDto
 import com.integracion.com.integracion.stock.service.product.GetProductDto
+import com.integracion.com.integracion.stock.service.product.PostProductDto
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.server.config.*
 import io.ktor.server.testing.*
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
@@ -14,7 +14,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ProductTest {
-
     private fun ApplicationTestBuilder.setup() {
         application {
             fakeAppModule()
@@ -22,6 +21,7 @@ class ProductTest {
 
     }
 
+    @Functional
     @Test
     fun testGetAllProducts() = testApplication {
         setup()
@@ -33,6 +33,7 @@ class ProductTest {
         }
     }
 
+    @Functional
     @Test
     fun testGetProductById() = testApplication {
         setup()
@@ -55,6 +56,7 @@ class ProductTest {
         }
     }
 
+    @Functional
     @Test
     fun testGetProductByInvalidId() = testApplication {
         setup()
@@ -63,6 +65,7 @@ class ProductTest {
         }
     }
 
+    @Functional
     @Test
     fun testCreateProduct() = testApplication {
         setup()
@@ -94,6 +97,7 @@ class ProductTest {
         }
     }
 
+    @Functional
     @Test
     fun testUpdateProduct() = testApplication {
         setup()
@@ -130,6 +134,7 @@ class ProductTest {
         }
     }
 
+    @Functional
     @Test
     fun testDeleteProduct() = testApplication {
         setup()

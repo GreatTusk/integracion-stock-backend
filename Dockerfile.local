@@ -12,6 +12,7 @@ FROM gradle:8-jdk17 AS build
 COPY --from=cache /home/gradle/cache_home /home/gradle/.gradle
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
+# RUN gradle test --tests "*.*" -PincludeTags=Functional --no-daemon
 RUN gradle buildFatJar --no-daemon
 
 # Stage 3: Create the Runtime Image

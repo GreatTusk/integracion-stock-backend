@@ -1,5 +1,6 @@
-package com.integracion.com.integracion.stock.controller
+package com.integracion.com.integracion.stock.endtoend
 
+import com.integracion.com.integracion.stock.annotations.EndToEnd
 import com.integracion.com.integracion.stock.service.product.GetProductDto
 import com.integracion.com.integracion.stock.service.product.PostProductDto
 import com.integracion.module
@@ -15,6 +16,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
+@EndToEnd
 class ProductTest {
 
     private fun ApplicationTestBuilder.setup() {
