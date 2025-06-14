@@ -24,4 +24,6 @@ ENV PORT 8080
 ENV POSTGRES_URL jdbc:postgresql://db:5432/stock
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD password
+ENV USE_IN_MEMORY_DB false
+ENV ENABLE_RATE_LIMIT false
 ENTRYPOINT ["java","-jar","/app/ktor-docker-sample.jar"]

@@ -11,8 +11,10 @@ fun main(args: Array<String>) = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
     if (environment.config.property("h2.use-h2").getString().toBooleanStrict()) {
+        log.info("Using in memory db")
         Database.connect(::connectToEmbeddedDb)
     } else {
+        log.info("Using Postgres db")
         Database.connect(::connectToPostgres)
     }
 

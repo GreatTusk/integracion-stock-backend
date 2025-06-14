@@ -10,3 +10,5 @@ postgres:
   password: $POSTGRES_PASSWORD
 h2:
   use-h2: $USE_IN_MEMORY_DB
+rate-limit:
+  enabled: $ENABLE_RATE_LIMIT
