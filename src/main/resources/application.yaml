@@ -8,3 +8,5 @@ postgres:
   url: $POSTGRES_URL
   user: $POSTGRES_USER
   password: $POSTGRES_PASSWORD
+h2:
+  use-h2: $USE_IN_MEMORY_DB

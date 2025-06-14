@@ -10,7 +10,12 @@ import org.jetbrains.exposed.sql.Database
 fun main(args: Array<String>) = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
-    Database.connect(::connectToPostgres)
+    if (environment.config.property("h2.use-h2").getString().toBooleanStrict()) {
+        Database.connect(::connectToEmbeddedDb)
+    } else {
+        Database.connect(::connectToPostgres)
+    }
+
     initializeDatabase()
 
     configureContentNegotiation()
