@@ -51,6 +51,24 @@ fun Application.productCategoryRoute() {
                     }
             }
 
+            delete("/{id}") {
+                val id = call.pathParameters["id"]?.toIntOrNull() ?: return@delete call.respond(
+                    HttpStatusCode.BadRequest,
+                    "Invalid id"
+                )
+
+                productCategoryRepository.deleteProductCategoryById(id)
+                    .onSuccess {
+                        call.respond(HttpStatusCode.NoContent)
+                    }
+                    .onError {
+                        call.respond(HttpStatusCode.InternalServerError)
+                    }
+                    .onEmpty {
+                        call.respond(HttpStatusCode.NotFound)
+                    }
+            }
+
             post {
                 val category = try {
                     call.receive<ProductCategoryDto>()

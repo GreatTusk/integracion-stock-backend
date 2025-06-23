@@ -215,7 +215,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: "string"
+                type: "object"
               examples:
                 Example#1:
                   value: "Malformed category"
@@ -251,7 +251,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: "string"
+                type: "object"
               examples:
                 Example#1:
                   value: "Malformed category"
@@ -298,6 +298,42 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/ProductCategory"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+    delete:
+      description: ""
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Invalid id"
+        "204":
+          description: "No Content"
+          content:
+            '*/*':
+              schema:
+                type: "object"
         "500":
           description: "Internal Server Error"
           content:

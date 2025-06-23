@@ -1,6 +1,7 @@
 package com.integracion.com.integracion.stock.data.product
 
 import com.integracion.com.integracion.stock.core.common.DataError
+import com.integracion.com.integracion.stock.core.common.EmptyResult
 import com.integracion.com.integracion.stock.core.common.Result
 import com.integracion.com.integracion.stock.core.common.emptyError
 import com.integracion.com.integracion.stock.core.database.entity.product.CategoryEntity
@@ -39,5 +40,10 @@ object DbProductCategoryRepository : ProductCategoryRepository {
                 it.name = category.name
                 it.description = category.description
             }?.toCategory() ?: emptyError("Didn't find category")
+        }
+
+    override suspend fun deleteProductCategoryById(id: Int): EmptyResult<DataError.Remote> =
+        safeSuspendTransaction {
+            CategoryEntity.findById(id)?.delete() ?: emptyError("Not found")
         }
 }
