@@ -23,9 +23,21 @@ object DbProductCategoryRepository : ProductCategoryRepository {
 
     override suspend fun createProductCategory(categoryDto: ProductCategoryDto): Result<ProductCategory, DataError.Remote> =
         safeSuspendTransaction {
-            CategoryEntity.new {
-                name = categoryDto.name
-                description = categoryDto.description
-            }.toCategory()
+            try {
+                CategoryEntity.new {
+                    name = categoryDto.name
+                    description = categoryDto.description
+                }.toCategory()
+            } catch (_: Exception) {
+                error("Integrity violation")
+            }
+        }
+
+    override suspend fun updateProductCategory(category: ProductCategory): Result<ProductCategory, DataError.Remote> =
+        safeSuspendTransaction {
+            CategoryEntity.findByIdAndUpdate(category.id) {
+                it.name = category.name
+                it.description = category.description
+            }?.toCategory() ?: emptyError("Didn't find category")
         }
 }

@@ -6,7 +6,7 @@ import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
 object CategoryTable : IntIdTable("category_table") {
-    val name = varchar("name", 50)
+    val name = varchar("name", 50).uniqueIndex()
     val description = text("description")
 }
 

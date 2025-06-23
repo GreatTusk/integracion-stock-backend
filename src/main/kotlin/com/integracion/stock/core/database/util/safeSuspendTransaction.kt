@@ -12,6 +12,8 @@ suspend fun <T> safeSuspendTransaction(block: Transaction.() -> T): Result<T, Da
     Result.Success(newSuspendedTransaction(Dispatchers.IO, statement = block))
 } catch (e: EmptyException) {
     Result.Empty
+} catch (e: IllegalStateException) {
+    Result.Error(DataError.Remote.LOGICAL)
 } catch (e: ExposedSQLException) {
     Result.Error(DataError.Remote.LOGICAL)
 } catch (e: Exception) {
